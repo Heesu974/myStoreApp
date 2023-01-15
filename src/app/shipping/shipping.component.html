@@ -2,7 +2,7 @@
   <mat-list *ngIf="shippingCosts">
     <mat-list-item
       class="ship-list"
-      *ngFor="let shipsCost of shippingCosts | async"
+      *ngFor="let shipsCost of shippingCosts"
     >
       <span>{{ shipsCost.type }}</span>
       <span>{{ shipsCost.price | currency }}</span>

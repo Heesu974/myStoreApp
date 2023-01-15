@@ -14,6 +14,7 @@ export class CartService {
   }
   private productsUrl = 'api/products';
   private cartUrl ='api/cart';
+  private shippingData = 'api/shippingCosts';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type':'application/json'})
@@ -24,7 +25,7 @@ export class CartService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: 리모트 서버로 에러 메시지 보내기
-      console.error(error); // 지금은 콘솔에 로그를 출력합니다.
+      console.error(error, operation, result); // 지금은 콘솔에 로그를 출력합니다.
 
       // TODO: 사용자가 이해할 수 있는 형태로 변환하기
       this.log(`${operation} failed: ${error.message}`);
@@ -41,10 +42,8 @@ export class CartService {
     return this.items;
   }
 
-  getShippingCost() {
-    return this.http.get<{ type: string; price: number }[]>(
-      '/assets/shipping.json'
-    );
+  getShippingCost():Observable<{type:string; price:number}[]> {
+    return this.http.get<{ type: string; price: number }[]>(this.shippingData);
   }
 
   // GET: 서버에서 products 목록 가져오기
@@ -67,7 +66,7 @@ export class CartService {
 
   // PUT: 서버에 저장된 cart 목록 변경하기. - 장바구니에 상품이 추가될 때,
   updateCart(product:Product):Observable<any> {
-    console.log('cart에 목록 추가하기 product:', product)
+    console.log(product)
     return this.http.put(this.cartUrl, product, this.httpOptions).pipe(tap(_=>this.log('Succeded update cart')),
     catchError(this.handleError<Product>('updateCart')))
   }

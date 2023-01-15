@@ -3,7 +3,7 @@
   [ngClass]="{ 'is-desktop-landscape': !isHandsetLandscape }"
 >
   <mat-card
-    *ngFor="let product of products | async"
+    *ngFor="let product of products"
     class="product-card"
     [ngClass]="{ 'is-desktop-landscape': !isHandsetLandscape }"
   >

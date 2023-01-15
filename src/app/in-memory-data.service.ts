@@ -55,9 +55,27 @@ export class InMemoryDataService implements InMemoryDbService {
           'https://th.bing.com/th/id/OIP.3Pw4IEvtWMPHABKxUEhAMgHaFj?w=257&h=193&c=7&r=0&o=5&dpr=1.1&pid=1.7',
       },
     ];
+    let shippingCosts:{type:string, price:number}[] = [
+
+        {
+          "type": "Overnight",
+          "price": 25.99
+        },
+        {
+          "type": "2-Day",
+          "price": 9.99
+        },
+        {
+          "type": "Postal",
+          "price": 2.99
+        }
+
+      
+    ]
     let cart:Product[] = [
+      
     ];
 
-    return { products, cart };
+    return { products, cart, shippingCosts };
   }
 }
