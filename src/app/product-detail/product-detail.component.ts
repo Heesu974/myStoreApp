@@ -10,8 +10,8 @@ import { CartService } from '../cart.service';
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent {
-  product: Product | undefined;
-  products: Observable<Product[]> = this.cartservice.getProducts();
+  product!: Product;
+  
 
   constructor(
     private route: ActivatedRoute,
@@ -21,10 +21,15 @@ export class ProductDetailComponent {
   ngOnInit() {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = Number(routeParams.get('productId'));
+    if(productIdFromRoute){
+      this.callMatchedProduct(productIdFromRoute);
+    }
+    
+   
+  }
 
-    // this.product = this.products.find(
-    //   (product) => product.id === productIdFromRoute
-    // );
-    console.log('products', this.products);
+  callMatchedProduct(productId:number):void {
+    this.cartservice.findProduct(productId).subscribe((matchedProduct) => this.product = matchedProduct);
+    //여기서 부터
   }
 }

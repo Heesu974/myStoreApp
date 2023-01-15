@@ -72,5 +72,10 @@ export class CartService {
     catchError(this.handleError<Product>('updateCart')))
   }
 
+
+  findProduct(id:number):Observable<Product> {
+    const targetUrl = `${this.productsUrl}/${id}`;
+    return this.http.get<Product>(targetUrl);
+  }
   
 }
