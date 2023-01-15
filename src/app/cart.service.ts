@@ -13,6 +13,12 @@ export class CartService {
     console.log(`inside cartService: ${message}`);
   }
   private productsUrl = 'api/products';
+  private cartUrl ='api/cart';
+
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type':'application/json'})
+  }
+
   constructor(private http: HttpClient) {}
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -44,8 +50,27 @@ export class CartService {
   // GET: 서버에서 products 목록 가져오기
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productsUrl).pipe(
-      tap((_) => this.log('fetched heroes')),
+      tap((_) => this.log('fetched static products')),
       catchError(this.handleError<Product[]>('getProducts', []))
     );
   }
+
+  //GET: 서버에서 cart 목록 가져오기.
+  getCart():Observable<Product[]>{
+
+    console.log('cart 목록 가져오기 products:', this.http.get<Product[]>(this.cartUrl))
+    return this.http.get<Product[]>(this.cartUrl).pipe(tap(_ => this.log('fetched cart')),
+    catchError(this.handleError<Product[]>('getCart', []))
+    );
+
+  }
+
+  // PUT: 서버에 저장된 cart 목록 변경하기. - 장바구니에 상품이 추가될 때,
+  updateCart(product:Product):Observable<any> {
+    console.log('cart에 목록 추가하기 product:', product)
+    return this.http.put(this.cartUrl, product, this.httpOptions).pipe(tap(_=>this.log('Succeded update cart')),
+    catchError(this.handleError<Product>('updateCart')))
+  }
+
+  
 }

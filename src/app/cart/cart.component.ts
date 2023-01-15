@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
 import { TestCartService } from '../test-cart.service';
+import { observable, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -9,10 +10,21 @@ import { TestCartService } from '../test-cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
-  items = this.cartservice.showProductsInCart();
-  // testCart = this.testcartservice.getDataInCart();
-  constructor(
+  items: Product[] = [];
+    constructor(
     private cartservice: CartService
-  ) // private testcartservice: TestCartService
+  ) 
   {}
+
+  ngOnInit():void {
+    this.getCart();
+  }
+  getCart():void {
+    this.cartservice.getCart().subscribe(observableData => this.items = observableData);
+  }
 }
+
+
+
+
+

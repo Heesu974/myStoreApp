@@ -26,7 +26,8 @@
     <button
       mat-stroked-button
       (click)="
-        openSnackBar('장바구니에 담겼습니다.', '확인'); addToCart(product)
+        openSnackBar('장바구니에 담겼습니다.', '확인');
+        clickCart(product);
       "
     >
       장바구니 담기

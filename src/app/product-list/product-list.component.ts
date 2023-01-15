@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Product } from '../product';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -14,11 +14,24 @@ export class ProductListComponent {
   products: Observable<Product[]> = this.cartservice.getProducts();
   isHandsetLandscape = false;
   durationInSeconds = 5;
+  product!: Product;
+
+  
   constructor(
     private responsive: BreakpointObserver,
     private _snackBar: MatSnackBar,
     private cartservice: CartService
   ) {}
+
+  clickCart(product:Product):void {
+    console.log('장바구니 담기가 클릭 됨')
+    this.cartservice.updateCart(product).subscribe((product) => {
+      console.log('updateCart 서비스가 읽힘')
+      this.product = product;
+    });
+  }
+  
+
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -38,6 +51,7 @@ export class ProductListComponent {
           this.isHandsetLandscape = true;
         }
       });
-    // this.products = this.cartservice.getProducts();
+      this.clickCart(this.product);
   }
+
 }

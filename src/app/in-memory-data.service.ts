@@ -8,7 +8,7 @@ import { CartService } from './cart.service';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const products = [
+    let products:Product[] = [
       {
         id: 1,
         product: 'LG',
@@ -55,7 +55,9 @@ export class InMemoryDataService implements InMemoryDbService {
           'https://th.bing.com/th/id/OIP.3Pw4IEvtWMPHABKxUEhAMgHaFj?w=257&h=193&c=7&r=0&o=5&dpr=1.1&pid=1.7',
       },
     ];
+    let cart:Product[] = [
+    ];
 
-    return { products };
+    return { products, cart };
   }
 }
