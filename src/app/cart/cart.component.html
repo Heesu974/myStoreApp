@@ -1,6 +1,10 @@
 <div class="cart-container" *ngIf="items">
-  <mat-selection-list #productsInCart>
-    <mat-list-option *ngFor="let item of items">
+  <mat-selection-list #productsInCart
+  (click)="getCartList(productsInCart)"
+  >
+    <mat-list-option *ngFor="let item of items"
+    
+    >
       {{ item.product }}
     </mat-list-option>
   </mat-selection-list>

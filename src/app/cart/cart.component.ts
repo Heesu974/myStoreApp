@@ -4,6 +4,7 @@ import { CartService } from '../cart.service';
 import { TestCartService } from '../test-cart.service';
 import { observable, Observable } from 'rxjs';
 import { ProductListComponent } from '../product-list/product-list.component';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,6 @@ import { ProductListComponent } from '../product-list/product-list.component';
 export class CartComponent {
   items: Product[] = [];
 
- 
 
     constructor(
     private cartservice: CartService
@@ -24,7 +24,7 @@ export class CartComponent {
 
   ngOnInit():void {
     this.getCart();
-   
+
     
   }
   getCart():void {
@@ -36,6 +36,10 @@ export class CartComponent {
     this.cartservice.updateCart(product).subscribe(() => console.log(product));
   }
 
+  getCartList(productsInCart:any){
+    console.log(productsInCart.selectedOptions.selected)
+    
+  }
 }
 
 
