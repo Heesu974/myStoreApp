@@ -1,0 +1,20 @@
+.product-list {
+  padding: 48px;
+}
+.product-card {
+  margin-bottom: 10px;
+}
+
+.product-card.is-desktop-landscape {
+  justify-content: space-between;
+  width: 33.3%;
+  margin-right: 10px;
+}
+
+.product-list.is-desktop-landscape {
+  display: flex;
+}
+.product-image.is-desktop-landscape {
+  border: 1px solid black;
+  width: 200px;
+}

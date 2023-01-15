@@ -1,0 +1,35 @@
+<div
+  class="product-list"
+  [ngClass]="{ 'is-desktop-landscape': !isHandsetLandscape }"
+>
+  <mat-card
+    *ngFor="let product of products | async"
+    class="product-card"
+    [ngClass]="{ 'is-desktop-landscape': !isHandsetLandscape }"
+  >
+    <mat-card-header>
+      <mat-card-title-group>
+        <mat-card-title
+          routerLink="product/{{ product.id }}"
+          title="{{ product.product }} details"
+          >{{ product.product }}</mat-card-title
+        >
+        <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+        <img
+          class="product-image"
+          src="{{ product.imagePath }}"
+          [ngClass]="{ 'is-desktop-landscape': !isHandsetLandscape }"
+        />
+      </mat-card-title-group>
+    </mat-card-header>
+
+    <button
+      mat-stroked-button
+      (click)="
+        openSnackBar('장바구니에 담겼습니다.', '확인'); addToCart(product)
+      "
+    >
+      장바구니 담기
+    </button>
+  </mat-card>
+</div>

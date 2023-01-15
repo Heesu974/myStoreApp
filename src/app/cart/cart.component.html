@@ -1,0 +1,19 @@
+<div class="cart-container" *ngIf="items">
+  <mat-selection-list #productsInCart>
+    <mat-list-option *ngFor="let item of items">
+      {{ item.product }}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <p>선택된 제품 갯수: {{ productsInCart.selectedOptions.selected.length }}</p>
+
+  <h2 [hidden]="items">담긴 상품이 없습니다.</h2>
+
+  <button mat-button color="primary" routerLink="/shipping">
+    See Shipping Costs
+  </button>
+</div>
+
+<!-- <div *ngIf="testCart">
+  <p>{{ testCart }}</p>
+</div> -->
